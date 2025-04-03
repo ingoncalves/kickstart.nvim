@@ -705,7 +705,17 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
-        --
+
+        -- begin my servers
+        ts_ls = {}, -- typescript
+        eslint = {}, -- eslint
+        clangd = {}, -- C/C++
+        jsonls = {}, -- json
+        ltex = {}, -- latex
+        marksman = {}, -- markdown
+        pyright = {}, -- python
+        terraformls = {}, -- terraform
+        -- end my servers
 
         lua_ls = {
           -- cmd = { ... },
