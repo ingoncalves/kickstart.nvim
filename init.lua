@@ -806,6 +806,16 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        css = { 'prettierd', 'prettier', stop_after_first = true },
+        scss = { 'prettierd', 'prettier', stop_after_first = true },
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        javascript = { 'eslind_d', 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'eslind_d', 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'eslind_d', 'prettierd', 'prettier', stop_after_first = true },
+        python = { 'autopep8', 'black', stop_after_first = true },
+        json = { 'jq', 'prettierd', 'prettier', stop_after_first = true },
+        c = { 'clang_format' },
+        cpp = { 'clang_format' },
       },
     },
   },
