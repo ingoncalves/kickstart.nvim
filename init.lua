@@ -777,7 +777,7 @@ require('lazy').setup({
       {
         '<leader>f',
         function()
-          require('conform').format { async = true, lsp_format = 'fallback' }
+          require('conform').format { async = true, lsp_format = 'prefer' }
         end,
         mode = '',
         desc = '[F]ormat buffer',
@@ -785,20 +785,20 @@ require('lazy').setup({
     },
     opts = {
       notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          return nil
-        else
-          return {
-            timeout_ms = 500,
-            lsp_format = 'fallback',
-          }
-        end
-      end,
+      --format_on_save = function(bufnr)
+      ---- Disable "format_on_save lsp_fallback" for languages that don't
+      ---- have a well standardized coding style. You can add additional
+      ---- languages here or re-enable it for the disabled ones.
+      --local disable_filetypes = { c = true, cpp = true }
+      --if disable_filetypes[vim.bo[bufnr].filetype] then
+      --return nil
+      --else
+      --return {
+      --timeout_ms = 500,
+      --lsp_format = 'fallback',
+      --}
+      --end
+      --end,
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
@@ -809,9 +809,9 @@ require('lazy').setup({
         css = { 'prettierd', 'prettier', stop_after_first = true },
         scss = { 'prettierd', 'prettier', stop_after_first = true },
         html = { 'prettierd', 'prettier', stop_after_first = true },
-        javascript = { 'eslind_d', 'prettierd', 'prettier', stop_after_first = true },
-        typescript = { 'eslind_d', 'prettierd', 'prettier', stop_after_first = true },
-        typescriptreact = { 'eslind_d', 'prettierd', 'prettier', stop_after_first = true },
+        javascript = { 'eslind_d', 'eslint', 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'eslind_d', 'eslint', 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'eslind_d', 'eslint', 'prettierd', 'prettier', stop_after_first = true },
         python = { 'autopep8', 'black', stop_after_first = true },
         json = { 'jq', 'prettierd', 'prettier', stop_after_first = true },
         c = { 'clang_format' },
