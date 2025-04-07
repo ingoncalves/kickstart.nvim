@@ -713,13 +713,13 @@ require('lazy').setup({
         -- ts_ls = {},
 
         -- begin my servers
-        ts_ls = {}, -- typescript
-        eslint = {}, -- eslint
-        clangd = {}, -- C/C++
-        jsonls = {}, -- json
-        ltex = {}, -- latex
-        marksman = {}, -- markdown
-        pyright = {}, -- python
+        ts_ls = {},       -- typescript
+        eslint = {},      -- eslint
+        clangd = {},      -- C/C++
+        jsonls = {},      -- json
+        ltex = {},        -- latex
+        marksman = {},    -- markdown
+        pyright = {},     -- python
         terraformls = {}, -- terraform
         -- end my servers
 
