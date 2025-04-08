@@ -10,6 +10,7 @@ return {
   'tpope/vim-abolish',
   'tpope/vim-repeat',
   'tpope/vim-surround',
+  'nvim-treesitter/nvim-treesitter-context',
   'ThePrimeagen/refactoring.nvim',
   'github/copilot.vim',
   {
