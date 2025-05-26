@@ -4,7 +4,6 @@
 -- See the kickstart.nvim README for more information
 return {
   'andymass/vim-matchup',
-  'editorconfig/editorconfig-vim',
   'junegunn/vim-easy-align',
   'preservim/nerdcommenter',
   'tpope/vim-abolish',

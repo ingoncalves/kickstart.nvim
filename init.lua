@@ -168,8 +168,15 @@ vim.opt.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Highlight word under cursor with * without jumpping
+vim.cmd([[ nnoremap * :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<C-M> ]])
+
+-- Search for visually selected text with Ctrl+R
+vim.cmd([[ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left> ]])
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostic [E]rror' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -670,8 +677,9 @@ require('lazy').setup({
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
         severity_sort = true,
-        float = { border = 'rounded', source = 'if_many' },
-        underline = { severity = vim.diagnostic.severity.ERROR },
+        --float = { border = 'rounded', source = 'if_many' },
+        float = { border = 'rounded' },
+        --underline = { severity = vim.diagnostic.severity.ERROR },
         signs = vim.g.have_nerd_font and {
           text = {
             [vim.diagnostic.severity.ERROR] = 'E',
@@ -680,19 +688,20 @@ require('lazy').setup({
             [vim.diagnostic.severity.HINT] = 'H',
           },
         } or {},
-        virtual_text = {
-          source = 'if_many',
-          spacing = 2,
-          format = function(diagnostic)
-            local diagnostic_message = {
-              [vim.diagnostic.severity.ERROR] = diagnostic.message,
-              [vim.diagnostic.severity.WARN] = diagnostic.message,
-              [vim.diagnostic.severity.INFO] = diagnostic.message,
-              [vim.diagnostic.severity.HINT] = diagnostic.message,
-            }
-            return diagnostic_message[diagnostic.severity]
-          end,
-        },
+        virtual_text = false,
+        --virtual_text = {
+          --source = 'if_many',
+          --spacing = 2,
+          --format = function(diagnostic)
+            --local diagnostic_message = {
+              --[vim.diagnostic.severity.ERROR] = diagnostic.message,
+              --[vim.diagnostic.severity.WARN] = diagnostic.message,
+              --[vim.diagnostic.severity.INFO] = diagnostic.message,
+              --[vim.diagnostic.severity.HINT] = diagnostic.message,
+            --}
+            --return diagnostic_message[diagnostic.severity]
+          --end,
+        --},
       }
 
       -- LSP servers and clients are able to communicate to each other what features they support.
