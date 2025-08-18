@@ -3,6 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+  'kevinhwang91/nvim-bqf',
   'andymass/vim-matchup',
   'junegunn/vim-easy-align',
   'preservim/nerdcommenter',
@@ -12,6 +13,12 @@ return {
   'nvim-treesitter/nvim-treesitter-context',
   'ThePrimeagen/refactoring.nvim',
   'github/copilot.vim',
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require'colorizer'.setup()
+    end,
+  },
   {
     'Wansmer/treesj',
     keys = { '<space>m', '<space>j', '<space>s' },
