@@ -12,7 +12,6 @@ return {
   'tpope/vim-surround',
   'nvim-treesitter/nvim-treesitter-context',
   'ThePrimeagen/refactoring.nvim',
-  'github/copilot.vim',
   {
     'norcalli/nvim-colorizer.lua',
     config = function()
