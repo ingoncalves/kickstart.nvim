@@ -26,5 +26,9 @@ return {
     config = function()
       require('treesj').setup()
     end,
-  }
+  },
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = {'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio'}
+  }, -- Debugging
 }
