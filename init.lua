@@ -390,6 +390,14 @@ require('lazy').setup({
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+
+      -- Allow using arguments when using live_grep
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim" ,
+        -- This will not install any breaking changes.
+        -- For major updates, this must be adjusted manually.
+        version = "^1.0.0",
+      },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -473,9 +481,11 @@ require('lazy').setup({
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'live_grep_args')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+      local extensions = require 'telescope'.extensions
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -488,7 +498,8 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>st', builtin.git_status, { desc = "[S]earch Git S[t]atus" })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Search Files alias [Control + p]' })
-      vim.keymap.set('n', '<C-f>', builtin.live_grep, { desc = 'Search by Grep alias [Control + f]' })
+      --vim.keymap.set('n', '<C-f>', builtin.live_grep, { desc = 'Search by Grep alias [Control + f]' })
+      vim.keymap.set('n', '<C-f>', extensions.live_grep_args.live_grep_args, { desc = '[S]earch by [A]rguments Grep' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
