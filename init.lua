@@ -750,7 +750,15 @@ require('lazy').setup({
         -- ts_ls = {},
 
         -- begin my servers
-        ts_ls = {},       -- typescript
+        ts_ls = {         -- typescript
+          init_options = {
+            preferences = {
+              -- Suggest (and auto-import) exports from other modules/packages
+              includeCompletionsForModuleExports = true,
+              includeCompletionsWithInsertText = true,
+            },
+          },
+        },
         eslint = {},      -- eslint
         clangd = {},      -- C/C++
         jsonls = {},      -- json
@@ -938,6 +946,40 @@ require('lazy').setup({
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = false, auto_show_delay_ms = 500 },
+
+        menu = {
+          draw = {
+            -- Show the module a symbol comes from (e.g. "react", "@mui/material") next to the label,
+            -- followed by who provided the suggestion (LSP server name, Snippets, Path, ...)
+            columns = { { 'kind_icon' }, { 'label', gap = 1 }, { 'source_module', gap = 1 }, { 'provider' } },
+            components = {
+              provider = {
+                text = function(ctx)
+                  return '[' .. (ctx.item.client_name or ctx.source_name) .. ']'
+                end,
+                highlight = 'Comment',
+              },
+              source_module = {
+                width = { max = 40 },
+                text = function(ctx)
+                  local item = ctx.item
+                  -- ts_ls puts the module specifier of auto-import items here
+                  local desc = item.labelDetails and item.labelDetails.description
+                  if desc and desc ~= '' then
+                    return desc
+                  end
+                  -- Fallback: ts_ls also keeps the source in the item's resolve data
+                  local entry = item.data and item.data.entryNames and item.data.entryNames[1]
+                  if type(entry) == 'table' and entry.source then
+                    return entry.source
+                  end
+                  return ''
+                end,
+                highlight = 'BlinkCmpLabelDescription',
+              },
+            },
+          },
+        },
       },
 
       sources = {
