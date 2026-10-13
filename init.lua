@@ -166,6 +166,10 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+-- Draw a border around floating windows (LSP hover with `K`, signature help, diagnostics, ...)
+-- so they stand out from the editor background. The border color is set in the colorscheme config.
+vim.o.winborder = 'rounded'
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -1018,6 +1022,10 @@ require('lazy').setup({
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
+        -- White-ish border for floating windows (see `winborder` option)
+        on_highlights = function(hl, c)
+          hl.FloatBorder = { fg = c.fg, bg = c.bg_float }
+        end,
       }
 
       -- Load the colorscheme here.
